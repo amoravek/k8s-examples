@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mq
+  namespace: argocd
+spec:
+  destination:
+    namespace: argo-apps
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: apps/mq
+    repoURL: https://github.com/amoravek/k8s-examples.git
+    targetRevision: HEAD
+
