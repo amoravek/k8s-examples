@@ -78,7 +78,7 @@ spec:
         name: mq-config-volume
       - name: mq-var-mqm
         persistentVolumeClaim:
-          claimName: mq-data-pvc2
+          claimName: mq-data
   updateStrategy:
     rollingUpdate:
       partition: 0
