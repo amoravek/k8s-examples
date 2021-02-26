@@ -6,6 +6,3 @@ bases:
 patchesStrategicMerge:
 - service-account.yaml
 - volumes.yaml
-
-resources:
-- pvc.yaml
