@@ -1,0 +1,28 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configMapGenerator:
+- name: mq-config
+  literals:
+  - LANG=en_US
+  - LICENSE=accept
+  - MQ_ENABLE_METRICS='false'
+  - MQ_QMGR_NAME=QM1
+  - MQ_DEV='false'
+  files:
+  - mq-init.mqsc
+secretGenerator:
+- name: mq-secret
+  literals:
+  - MQ_ADMIN_PASSWORD=passw0rd
+  - MQ_APP_PASSWORD=passw0rd
+generatorOptions:
+  labels:
+    generatedBy: kustomize
+  annotations:
+    note: generated
+resources:
+- serviceaccount.yaml
+- statefulset.yaml
+- headless-service.yaml
+- nodeport-service.yaml
+

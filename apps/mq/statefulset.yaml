@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mq
+  name: mq
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mq
+  serviceName: mq
+  template:
+    metadata:
+      labels:
+        app: mq
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: mq-secret
+        - configMapRef:
+            name: mq-config
+        image: harbor.trask.cz/tif/ibmcom-mq-tif:9.1.3.0
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          tcpSocket:
+            port: mq-listener
+          timeoutSeconds: 1
+        name: mq
+        ports:
+        - containerPort: 1414
+          name: mq-listener
+          protocol: TCP
+        - containerPort: 9157
+          name: mq-metrics
+          protocol: TCP
+        - containerPort: 9443
+          name: mq-admin
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: mq-listener
+          timeoutSeconds: 1
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        volumeMounts:
+        - mountPath: /etc/mqm/mq-init.mqsc
+          name: mq-config-volume
+          readOnly: true
+          subPath: mq-init.mqsc
+        - mountPath: /mnt/mqm
+          name: mq-var-mqm
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      serviceAccount: mq
+      serviceAccountName: mq
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: mq-config
+        name: mq-config-volume
+      - name: mq-var-mqm
+        persistentVolumeClaim:
+          claimName: mq-data-pvc2
+  updateStrategy:
+    rollingUpdate:
+      partition: 0
+    type: RollingUpdate
+

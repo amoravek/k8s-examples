@@ -1,0 +1,53 @@
+alt qmgr connauth(' ')
+alt qmgr chlauth(disabled)
+refresh security type(connauth)
+
+def chl('SYSTEM.ADMIN.SVRCONN') chltype(svrconn) trptype(tcp) mcauser('mqm') replace
+def chl('GETSUM.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('GETHASH.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('GETCONTACTS.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('GETUSERNAME.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('GETLIST.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+
+def chl('TRS.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('AUS.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('SBL.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+def chl('TIF.SVRCONN') chltype(SVRCONN) trptype(TCP) mcauser('mqm') replace
+
+def ql(ESB.PAY.DOMESTICPAYMENT.GETSUM1.1.IN.Q);
+def qa(ESB.PAY.DOMESTICPAYMENT.GETSUM1.1.IN) target(ESB.PAY.DOMESTICPAYMENT.GETSUM1.1.IN.Q);
+def ql(ESB.PAY.DOMESTICPAYMENT.GETSUM1.1.RS.Q);
+
+def ql(ESB.ACS.SECTOKEN.GETCERTIFICATEHASH1.0.IN.Q);
+def qa(ESB.ACS.SECTOKEN.GETCERTIFICATEHASH1.0.IN) target(ESB.ACS.SECTOKEN.GETCERTIFICATEHASH1.0.IN.Q);
+def ql(ESB.ACS.SECTOKEN.GETCERTIFICATEHASH1.0.RS.Q);
+
+def ql(ESB.ACS.SECTOKEN.GETUSERNAME1.0.IN.Q);
+def qa(ESB.ACS.SECTOKEN.GETUSERNAME1.0.IN) target(ESB.ACS.SECTOKEN.GETUSERNAME.0.IN.Q);
+def ql(ESB.ACS.SECTOKEN.GETUSERNAME1.0.RS.Q)
+
+def ql(ESB.CUS.PARTY.GETCONTACTS1.0.IN.Q);
+def qa(ESB.CUS.PARTY.GETCONTACTS1.0.IN) target(ESB.CUS.PARTY.GETCONTACTS1.0.IN.Q);
+def ql(ESB.CUS.PARTY.GETCONTACTS1.0.RS.Q)
+
+def ql(ESB.MAR.ENTOFFER.GETLIST1.9.IN.Q);
+def qa(ESB.MAR.ENTOFFER.GETLIST1.9.IN) target(ESB.MAR.ENTOFFER.GETLIST1.9.IN.Q);
+def ql(ESB.MAR.ENTOFFER.GETLIST1.9.RS.Q)
+
+def qm('ESB.ACS.SECTOKEN.GETCERTIFICATEHASH1.0.RS.QM') share deftype(tempdyn) defsopt(shared) descr('Model queue for msvc-acs-entsecuritytoken-getcertificatehash-1-0')
+def qm('ESB.ACS.SECTOKEN.GETUSERNAME1.0.RS.QM') share deftype(tempdyn) defsopt(shared) descr('Model queue for msvc-acs-entsecuritytoken-getusername-1-0')
+def qm('ESB.CUS.PARTY.GETCONTACTS1.0.RS.QM') share deftype(tempdyn) defsopt(shared) descr('Model queue for msvc-cus-entparty-getcontacts-1-0')
+def qm('ESB.PAY.DOMESTICPAYMENT.GETSUM1.1.RS.QM') share deftype(tempdyn) defsopt(shared) descr('Model queue for msvc-pay-entdomesticpayment-getsum-1-1')
+def qm('ESB.MAR.ENTOFFER.GETLIST1.9.RS.QM') share deftype(tempdyn) defsopt(shared) descr('Model queue for msvc-mar-entoffer-getlist-1-9')
+
+def ql(JMETER.REPLYQ);
+def ql(WMB.TRS.IN);
+def ql(WMB.AUS.IN);
+def ql(WMB.SBL.IN);
+def ql(ESB.TRS.IN);
+def ql(ESB.AUS.IN);
+def ql(TRM.ERR.INF);
+def ql(MCH.REPLYQ);
+def ql(MCH.ERR.MON);
+def ql(TRM.ERR.MON);
+

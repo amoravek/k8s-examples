@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mq
+  name: mq
+spec:
+  ports:
+  - name: listener
+    port: 1414
+    protocol: TCP
+    targetPort: mq-listener
+    nodePort: 31415
+  - name: metrics
+    port: 9157
+    protocol: TCP
+    targetPort: mq-metrics
+  - name: admin
+    port: 9443
+    protocol: TCP
+    targetPort: mq-admin
+  selector:
+    app: mq
+  sessionAffinity: None
+  type: NodePort
