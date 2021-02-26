@@ -63,8 +63,6 @@ spec:
           name: mq-config-volume
           readOnly: true
           subPath: mq-init.mqsc
-        - mountPath: /mnt/mqm
-          name: mq-var-mqm
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       securityContext: {}
@@ -74,9 +72,6 @@ spec:
           defaultMode: 420
           name: mq-config
         name: mq-config-volume
-      - name: mq-var-mqm
-        persistentVolumeClaim:
-          claimName: mq-data
   updateStrategy:
     rollingUpdate:
       partition: 0

@@ -1,16 +1,10 @@
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
-  name: mq
+  name: mq-data
 spec:
-  template:
-    spec:
-      containers:
-      - name: mq
-        volumeMounts:
-        - mountPath: /mnt/mqm
-          name: mq-var-mqm
-      volumes:
-      - name: mq-var-mqm
-        persistentVolumeClaim:
-          claimName: mq-data
+  accessModes:
+    - ReadWriteOnce  
+  resources:
+    requests:
+      storage: 1Gi
