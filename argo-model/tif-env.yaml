@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: apps/mq
+    path: apps/mq/overlays/bi-openshift
     repoURL: https://github.com/amoravek/k8s-examples.git
     targetRevision: HEAD
 
