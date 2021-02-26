@@ -1,8 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mq
-  namespace: argocd
+  name: tif-environment
+  namespace: argo-apps
 spec:
   destination:
     namespace: argo-apps

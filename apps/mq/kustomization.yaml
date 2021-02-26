@@ -21,7 +21,6 @@ generatorOptions:
   annotations:
     note: generated
 resources:
-- serviceaccount.yaml
 - statefulset.yaml
 - headless-service.yaml
 - nodeport-service.yaml
