@@ -22,7 +22,6 @@ generatorOptions:
     note: generated
 resources:
 - serviceaccount.yaml
-- pvc.yaml
 - statefulset.yaml
 - headless-service.yaml
 - nodeport-service.yaml
