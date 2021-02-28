@@ -5,4 +5,4 @@ bases:
 
 patchesStrategicMerge:
 - service-account.yaml
-- volumes.yaml
+#- volumes.yaml
