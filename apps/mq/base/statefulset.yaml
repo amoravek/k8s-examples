@@ -25,16 +25,16 @@ spec:
         image: harbor.trask.cz/tif/ibmcom-mq-tif:9.1.3.0
         imagePullPolicy: IfNotPresent
         readinessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 10
+          failureThreshold: 5
+          initialDelaySeconds: 30
           periodSeconds: 5
           successThreshold: 1
           tcpSocket:
             port: mq-listener
           timeoutSeconds: 1
         livenessProbe:
-          failureThreshold: 3
-          initialDelaySeconds: 30
+          failureThreshold: 5
+          initialDelaySeconds: 60
           periodSeconds: 5
           successThreshold: 1
           tcpSocket:
