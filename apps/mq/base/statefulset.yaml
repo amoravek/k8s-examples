@@ -51,13 +51,13 @@ spec:
         - containerPort: 9443
           name: mq-admin
           protocol: TCP
-        resources:
-          requests:
-            memory: "512Mi"
-            cpu: "750m"
-          limits:
-            memory: "1Gi"
-            cpu: "1500m"
+#        resources:
+#          requests:
+#            memory: "512Mi"
+#            cpu: "750m"
+#          limits:
+#            memory: "1Gi"
+#            cpu: "1500m"
         volumeMounts:
         - mountPath: /etc/mqm/mq-init.mqsc
           name: mq-config-volume
