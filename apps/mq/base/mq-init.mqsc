@@ -50,5 +50,3 @@ def ql(TRM.ERR.INF);
 def ql(MCH.REPLYQ);
 def ql(MCH.ERR.MON);
 def ql(TRM.ERR.MON);
-def ql(TEST);
-def ql(AMOR);
